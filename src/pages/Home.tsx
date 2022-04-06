@@ -43,36 +43,36 @@ export default function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Welcome, Gustavo
-      </Text>
-      <TextInput 
-        style={styles.input}
-        placeholder="New skill"
-        placeholderTextColor="#555"
-        onChangeText={setNewSkill}
-        value={newSkill}
-      />
+		<View style={styles.container}>
+			<Text style={styles.title} testID="welcome">
+				Welcome, Gustavo
+			</Text>
+			<TextInput
+				testID="input-new"
+				style={styles.input}
+				placeholder="New skill"
+				placeholderTextColor="#555"
+				onChangeText={setNewSkill}
+				value={newSkill}
+			/>
 
-       <Button onPress={handleAddSkill} text="Add" />
+			<Button onPress={handleAddSkill} text="Add" testID="button-add" />
 
-      <Text style={[styles.title, {marginVertical: 30}]}>
-        My Skills
-      </Text>
+			<Text style={[styles.title, { marginVertical: 30 }]}>My Skills</Text>
 
-      <FlatList 
-        data={mySkills}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <SkillCard 
-            skill={item.name} 
-            onPress={() => handleRemoveSkill(item.name)}
-          />
-        )}
-      />
-    </View>
-  )
+			{mySkills && (
+				<FlatList
+					testID="flat-list-skills"
+					data={mySkills}
+					keyboardShouldPersistTaps="never"
+					keyExtractor={(item) => item.id}
+					renderItem={({ item }) => (
+						<SkillCard skill={item.name} onPress={() => handleRemoveSkill(item.name)} />
+					)}
+				/>
+			)}
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
